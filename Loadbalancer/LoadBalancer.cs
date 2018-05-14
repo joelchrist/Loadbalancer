@@ -73,18 +73,22 @@ namespace Loadbalancer
 
             var req = client.ReceiveData();
 
-            if (persistenceHandler.HasPersistence(req)) {
-                server = persistenceHandler.GetServer(req);
-            }
+			if (persistenceHandler.HasPersistence(req)) {
+			    server = persistenceHandler.GetServer(req);
+			}
 
+            
+			Console.WriteLine("Getting data from server, {0}:{1}", server.Url, server.Port);
+			if (!server.IsAvailable) {
+				var response = CreateServerErrorStatusCode();
+				client.SendData(response, true);
+				return;
+			}
 			var res = RetreiveDataFromServer(req, server);
 			
             if (!persistenceHandler.HasPersistence(req)) {
                 res = persistenceHandler.AddPersistence(res, server);
             }
-
-            Console.WriteLine(req);
-            Console.WriteLine(res);
 
 
             client.SendData(res, true);
@@ -107,6 +111,12 @@ namespace Loadbalancer
             client.GetStream().Close();
             client.Close();
             return data;
+        }
+
+		private static string CreateServerErrorStatusCode()
+        {
+            return "HTTP/1.1 504 Service Unavailable\r\nContent-Type: text/html\r\n\r\n" +
+                   "<p>503 Serivce Unavailable</p><p>JUpstream server is temporarily unavailible, please try again later.</p>";
         }
 
     }

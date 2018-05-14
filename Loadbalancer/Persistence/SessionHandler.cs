@@ -7,8 +7,8 @@ namespace Loadbalancer
 {
     public class SessionHandler : PersistenceHandler
     {
-        private const string COOKIE_HEADER = "Set-Cookie: LB={0}";
-        private const string COOKIE_ID = "LB";
+        private const string COOKIE_HEADER = "Set-Cookie: LBS={0}";
+        private const string COOKIE_ID = "LBS";
 
         private static int identifier = 0;
 
@@ -17,6 +17,7 @@ namespace Loadbalancer
         public string AddPersistence(string res, Server server)
         {
             var split = res.Split(new char[] { '\r', '\n' });
+			Console.WriteLine("Adding persistence for server {0}:{1}", server.Url, server.Port);
             split[0] = split[0] + "\n" + String.Format(COOKIE_HEADER, identifier);
             sessionTable.Add(identifier, server);
             identifier++;

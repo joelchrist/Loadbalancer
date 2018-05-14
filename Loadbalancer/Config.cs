@@ -7,7 +7,7 @@ namespace Loadbalancer
     {
         public static BalanceMethod BalanceMethod;
         public static PersistenceMethod PersistenceMethod;
-        public static List<Server> Servers = new List<Server>() { new Server("localhost", 8081), new Server("localhost", 8082) };
+        public static List<Server> Servers = new List<Server>() { new Server("localhost", 8081), new Server("localhost", 8082), new Server("localhost", 8083), new Server("localhost", 8084) };
 
         public static string Ip = "127.0.0.1";
         public static int Port = 8080;
