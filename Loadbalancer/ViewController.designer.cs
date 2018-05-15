@@ -24,8 +24,14 @@ namespace Loadbalancer
         [Outlet]
         AppKit.NSTextFieldCell statusLabel { get; set; }
 
+        [Outlet]
+        AppKit.NSTableView tableView { get; set; }
+
         [Action ("balancerTypeSelected:")]
         partial void balancerTypeSelected (AppKit.NSPopUpButton sender);
+
+        [Action ("deleteButtonClicked:")]
+        partial void deleteButtonClicked (AppKit.NSButton sender);
 
         [Action ("persistenceTypeSelected:")]
         partial void persistenceTypeSelected (AppKit.NSPopUpButton sender);
@@ -35,11 +41,6 @@ namespace Loadbalancer
         
         void ReleaseDesignerOutlets ()
         {
-            if (progressIndicator != null) {
-                progressIndicator.Dispose ();
-                progressIndicator = null;
-            }
-
             if (balancerPopup != null) {
                 balancerPopup.Dispose ();
                 balancerPopup = null;
@@ -50,9 +51,19 @@ namespace Loadbalancer
                 persistencePopup = null;
             }
 
+            if (progressIndicator != null) {
+                progressIndicator.Dispose ();
+                progressIndicator = null;
+            }
+
             if (statusLabel != null) {
                 statusLabel.Dispose ();
                 statusLabel = null;
+            }
+
+            if (tableView != null) {
+                tableView.Dispose ();
+                tableView = null;
             }
         }
     }

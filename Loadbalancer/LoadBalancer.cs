@@ -16,10 +16,10 @@ namespace Loadbalancer
         private bool listening = false;
 
         private Thread dataThread;
-
-        public LoadBalancer()
+                        
+		public LoadBalancer()
         {
-        }
+		}
 
         public void Start()
         {
@@ -74,7 +74,10 @@ namespace Loadbalancer
             var req = client.ReceiveData();
 
 			if (persistenceHandler.HasPersistence(req)) {
-			    server = persistenceHandler.GetServer(req);
+			    var persistentServer = persistenceHandler.GetServer(req);
+				if (Config.Servers.Contains(persistentServer)) {
+					server = persistentServer;
+				}
 			}
 
             

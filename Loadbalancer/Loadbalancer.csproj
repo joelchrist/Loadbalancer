@@ -93,6 +93,8 @@
     <Compile Include="Persistence\PersistenceHandlerFactory.cs" />
     <Compile Include="Persistence\SessionHandler.cs" />
     <Compile Include="Persistence\CookieHandler.cs" />
+    <Compile Include="ServerDataSource.cs" />
+    <Compile Include="ServerDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
