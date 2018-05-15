@@ -116,7 +116,7 @@ namespace Loadbalancer
 		private static string CreateServerErrorStatusCode()
         {
             return "HTTP/1.1 504 Service Unavailable\r\nContent-Type: text/html\r\n\r\n" +
-                   "<p>503 Serivce Unavailable</p><p>JUpstream server is temporarily unavailible, please try again later.</p>";
+                   "<p>503 Serivce Unavailable</p><p>Upstream server is temporarily unavailible, please try again later.</p>";
         }
 
     }
